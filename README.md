@@ -11,8 +11,9 @@ This repository contains a complete WGS data analysis workflow used in my MSc re
 5. **BAM Processing:** `SAMtools`, `Picard`
 6. **Variant Calling:** `GATK HaplotypeCaller`
 7. **Filtering:** `bcftools`
-8. **Annotation:** `VEP`, `ANNOVAR`
-9. **Visualization:** IGV, R-based plots
+8. **Structural variant detection:** `Lumpy` 
+9. **Annotation:** `VEP`, `ANNOVAR`
+10. **Visualization:** IGV, R-based plots
 
 ## Example Commands
 ```bash
@@ -85,6 +86,10 @@ picard MergeVcfs I=file_SNPs_final.vcf I=file_INDELs_final.vcf O=file_merged.vcf
 #Index and compress the final VCF
 bgzip file_merged.vcf
 tabix -p vcf file_merged.vcf.gz
+
+#Lumpy SV detection
+vep -i sample. lumpy.vcf -o sample.lumpy_annotated.vcf \
+--vcf --cache --offline --assembly GRCh38 --fork 4 --dir_cache /path/to/vep_cache
 
 # Annotation
 vep -i file_merged.vcf.gz -o filename_annotated.vcf --vcf --cache --offline --assembly GRCh38 --everything --fork 4 --dir_cache /path/to/vep_cache
