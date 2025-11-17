@@ -90,7 +90,8 @@ tabix -p vcf file_merged.vcf.gz
 #Lumpy SV detection
 vep -i sample. lumpy.vcf -o sample.lumpy_annotated.vcf \
 --vcf --cache --offline --assembly GRCh38 --fork 4 --dir_cache /path/to/vep_cache
-
+How wi did it for my data
+#singularity run   -B /mnt/lustre/bsp/DB/VEP/vep_data:/cache   $SIF   vep   --input_file PID225_merged_final.vcf.gz   --output_file PID225_Annotated.vcf   --vcf   --cache   --dir_cache /cache   --offline   --assembly GRCh38
 # Annotation
 vep -i file_merged.vcf.gz -o filename_annotated.vcf --vcf --cache --offline --assembly GRCh38 --everything --fork 4 --dir_cache /path/to/vep_cache
 
